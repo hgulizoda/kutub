@@ -1,8 +1,9 @@
 import { Flex, Text, Container, Button } from "@mantine/core";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { IconSun } from "@tabler/icons-react";
 import { Select } from "@mantine/core";
 const Header = ({ color }) => {
+  const navigate = useNavigate();
   return (
     <header
       style={{
@@ -25,7 +26,7 @@ const Header = ({ color }) => {
         }}
       >
         <Flex justify="space-between" align="center">
-          <Text fw="600" c={color}>
+          <Text fw="600" c={color} onClick={() => navigate("/")}>
             KUTUB
           </Text>
           <Flex gap="sm" align="center">

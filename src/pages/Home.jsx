@@ -79,6 +79,7 @@ const Home = () => {
             alignItems: "center",
             textAlign: "center",
             color: "white",
+            marginBottom: "100px",
           }}
         >
           <Stack

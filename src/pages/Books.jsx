@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { API } from "../api/api";
-import { Container, Flex, Grid } from "@mantine/core";
+import { Button, Container, Flex, Grid, Input } from "@mantine/core";
 import BooksCardGrid from "../components/BooksCardGrid";
+import { useState } from "react";
+import { IconSearch } from "@tabler/icons-react";
 
 const Books = () => {
+  const [searchData, setSearchData] = useState("");
   const { data: books } = useQuery({
     queryKey: ["books"],
     queryFn: async () => {
@@ -11,11 +14,30 @@ const Books = () => {
       return res.data;
     },
   });
+
+  const filteredData = books?.filter(
+    (book) => book.name.includes(searchData) || book.author.includes(searchData)
+  );
   return (
     <>
       <Container size="xl" mt="100px">
-        <Flex justify="space-between">
+        <Flex justify="space-between" align="center">
           <h1>Books</h1>
+          <Flex>
+            <Input
+              placeholder="search books by name or author"
+              styles={{
+                input: {
+                  borderRadius: "8px",
+                  border: "none",
+                  width: "300px",
+                },
+              }}
+            />
+            <Button>
+              <IconSearch />
+            </Button>
+          </Flex>
         </Flex>
 
         <Grid>
