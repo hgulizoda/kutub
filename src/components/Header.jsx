@@ -2,7 +2,6 @@ import { Flex, Text, Container, Button } from "@mantine/core";
 import { NavLink } from "react-router-dom";
 import { IconSun } from "@tabler/icons-react";
 import { Select } from "@mantine/core";
-import "flag-icons/css/flag-icons.min.css";
 const Header = ({ color }) => {
   return (
     <header
