@@ -3,12 +3,13 @@ import { NavLink } from "react-router-dom";
 import { IconSun } from "@tabler/icons-react";
 import { Select } from "@mantine/core";
 import "flag-icons/css/flag-icons.min.css";
-const Header = () => {
+const Header = ({ color }) => {
   return (
     <header
       style={{
         display: "flex",
         justifyContent: "center",
+        color: { color },
       }}
     >
       <Container
@@ -25,11 +26,17 @@ const Header = () => {
         }}
       >
         <Flex justify="space-between" align="center">
-          <Text fw="600">KUTUB</Text>
+          <Text fw="600" c={color}>
+            KUTUB
+          </Text>
           <Flex gap="sm" align="center">
             <Flex gap="lg" component="nav">
-              <NavLink>Books</NavLink>
-              <NavLink>Libraries</NavLink>
+              <NavLink to="/books" style={{ color: color }}>
+                Books
+              </NavLink>
+              <NavLink to="/libraries" style={{ color: color }}>
+                Libraries
+              </NavLink>
             </Flex>
 
             {/* <Select
