@@ -1,7 +1,9 @@
 import { Container, Group, Text, Anchor, Stack, Divider } from "@mantine/core";
 import { IconBooks, IconMapPin, IconBrandGithub } from "@tabler/icons-react";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <div style={{ backgroundColor: "#f1f3f5", padding: "40px 0" }}>
       <Container size="xl">
@@ -9,43 +11,41 @@ export default function Footer() {
           <Stack gap={4}>
             <Group>
               <IconBooks size={28} color="teal" />
-              <Text size="xl" fw={700} c="teal">
-                Kutub
-              </Text>
+              <Text size="xl" fw={700} c="teal"></Text>
             </Group>
             <Text size="sm" c="dimmed">
-              Find nearby libraries. Discover books instantly.
+              {t("footer.motto")}
             </Text>
           </Stack>
 
           <Group gap="50px">
             <Stack gap={6}>
               <Text fw={600} size="sm" c="teal">
-                Explore
+                {t("footer.explore")}
               </Text>
               <Anchor href="#" size="sm">
-                Find Libraries
+                {t("footer.findBooks")}
               </Anchor>
               <Anchor href="#" size="sm">
-                Find Books
+                {t("header.libraries")}
               </Anchor>
               <Anchor href="#" size="sm">
-                Categories
+                {t("footer.categories")}
               </Anchor>
             </Stack>
 
             <Stack gap={6}>
               <Text fw={600} size="sm" c="teal">
-                About
+                {t("footer.about")}
               </Text>
               <Anchor href="#" size="sm">
-                About Us
+                {t("footer.aboutUs")}
               </Anchor>
               <Anchor href="#" size="sm">
-                Contact
+                {t("footer.contact")}
               </Anchor>
               <Anchor href="#" size="sm">
-                FAQ
+                {t("footer.faq")}
               </Anchor>
             </Stack>
           </Group>
@@ -55,7 +55,7 @@ export default function Footer() {
 
         <Group justify="space-between" wrap="wrap">
           <Text size="sm" c="dimmed">
-            © 2025 BookScout — All rights reserved
+            {t("footer.copyright")}
           </Text>
 
           <Group>

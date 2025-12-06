@@ -4,9 +4,11 @@ import { Button, Container, Flex, Grid, Input } from "@mantine/core";
 import BooksCardGrid from "../components/BooksCardGrid";
 import { useState } from "react";
 import { IconSearch } from "@tabler/icons-react";
+import { useTranslation } from "react-i18next";
 
 const Books = () => {
   const [searchData, setSearchData] = useState("");
+  const { t } = useTranslation();
   const { data: books } = useQuery({
     queryKey: ["books"],
     queryFn: async () => {
@@ -22,7 +24,7 @@ const Books = () => {
     <>
       <Container size="xl" mt="100px">
         <Flex justify="space-between" align="center">
-          <h1>Books</h1>
+          <h1>{t("header.books")}</h1>
           <Flex>
             <Input
               placeholder="search books by name or author"

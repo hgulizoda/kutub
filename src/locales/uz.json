@@ -1,0 +1,19 @@
+{
+  "header": {
+    "books": "Kitoblar",
+    "libraries": "Kutubxonalar",
+    "logIn": "Kirish"
+  },
+
+  "footer": {
+    "motto": "Yaqindagi kutubxonalarni toping. Kitoblarni kashf qiling",
+    "explore": "Qidirish",
+    "findBooks": "Kitoblar qidiruvi",
+    "categories": "Kategoriyalar",
+    "about": "Haqida",
+    "aboutUs": "Biz haqimizda",
+    "contact": "Biz bilan bog'laning",
+    "faq": "Savol va Javoblar",
+    "copyright": "© 2025 Kutub — barcha huquqlar himoyalangan"
+  }
+}

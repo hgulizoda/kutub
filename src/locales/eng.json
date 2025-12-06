@@ -1,0 +1,19 @@
+{
+  "header": {
+    "books": "Books",
+    "libraries": "Libraries",
+    "logIn": "Log In"
+  },
+
+  "footer": {
+    "motto": "Find nearby libraries. Discover books instantly.",
+    "explore": "Explore",
+    "findBooks": "Find Books",
+    "categories": "Categories",
+    "about": "About",
+    "aboutUs": "About us",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "copyright": "© 2025 Kutub — All rights reserved"
+  }
+}

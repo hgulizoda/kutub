@@ -12,6 +12,7 @@ const BooksCardGrid = ({ author, name, publisher, id }) => {
       bg="transparent"
       mx="sm"
       component={Link}
+      to={`/books/${id}`}
       sx={{
         transition: "transform 0.2s",
         "&:hover": { transform: "scale(1.03)" },

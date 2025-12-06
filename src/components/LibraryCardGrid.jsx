@@ -1,11 +1,14 @@
 import { Card, Image, Text, Rating, Stack } from "@mantine/core";
 import { librariesImages } from "../constants/libs";
+import { Link } from "react-router-dom";
 
 const LibraryCardGrid = ({ name, rating, id }) => {
   return (
     <Card
       shadow="md"
       radius="md"
+      component={Link}
+      to={`/library/${id}`}
       p="0"
       mx="sm"
       style={{
