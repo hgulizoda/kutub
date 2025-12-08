@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import LibraryCardGrid from "./LibraryCardGrid";
 
 function PopularLibraries() {
-  const { data: libraries, isPending } = useQuery({
+  const { data: libraries } = useQuery({
     queryKey: ["libraries"],
     queryFn: async () => {
       const res = await API.get("/libraries/libraries");

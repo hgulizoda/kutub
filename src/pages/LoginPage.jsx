@@ -28,7 +28,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { API } from "../api/api";
 import useAuthStore from "../store/useAuthStore";
-import queryClient from "../api/queryClient";
 
 const images = [
   abdullaQodiriy,
@@ -61,18 +60,29 @@ const LoginPage = () => {
   }
   const mutation = useMutation({
     mutationFn: async ({ phone, password }) => {
-      const res = await API.post("/auth/login/", { phone, password });
-      return res.data;
+      const { data: tokens1 } = await API.post("/auth/login/", {
+        phone,
+        password,
+      });
+
+      const { data: user1 } = await API.get("/auth/profile/", {
+        headers: { Authorization: `Bearer ${tokens1.access}` },
+      });
+
+      return { tokens1, user1 };
     },
+
     onSuccess: (data) => {
       logIn(data);
-      queryClient.invalidateQueries(["user"]);
+
       navigate("/");
     },
+
     onError: () => {
       setError("Invalid username or password");
     },
   });
+
   return (
     <Container size="1600px" p="xl" h="100vh" px="50px">
       <Flex

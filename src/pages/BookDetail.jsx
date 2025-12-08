@@ -27,13 +27,12 @@ import {
 import axios from "axios";
 import CommentsCard from "../components/CommentsCard";
 import PopularBooks from "../components/PopularBooks";
-import { use } from "react";
 import LibraryCardList from "../components/LibraryCardList";
 
 const BookDetail = () => {
   const { bookID } = useParams();
 
-  const { data: book, error } = useQuery({
+  const { data: book } = useQuery({
     queryKey: ["bookDetail", bookID],
     queryFn: async () => {
       const res = await API.get(`/books/book/${bookID}/`);

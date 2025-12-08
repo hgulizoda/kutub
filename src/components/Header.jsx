@@ -5,7 +5,6 @@ import { Select } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import useAuthStore from "../store/useAuthStore";
-import { useQuery } from "@tanstack/react-query";
 import { API } from "../api/api";
 import uzb from "../assets/images/uzb.png";
 import uk from "../assets/images/uk.png";
@@ -17,19 +16,7 @@ const Header = ({ color }) => {
   console.log(value);
 
   console.log(value);
-  const { tokens, auth, setUser, user } = useAuthStore();
-
-  const { data } = useQuery({
-    queryKey: ["user", tokens?.access],
-    queryFn: async () => {
-      const res = await API.get("/auth/profile/", {
-        headers: {
-          Authorization: `Bearer ${tokens.access}`,
-        },
-      });
-      setUser(res.data);
-    },
-  });
+  const { auth, user } = useAuthStore();
 
   console.log(user);
 

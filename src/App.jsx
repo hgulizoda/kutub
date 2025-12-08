@@ -8,6 +8,7 @@ import MyBooks from "./pages/MyBooks";
 import BookDetail from "./pages/BookDetail";
 import LibraryDetail from "./pages/LibraryDetail";
 import UserProfile from "./pages/UserProfile";
+import UserLayout from "./components/UserLayout";
 
 const App = () => {
   return (
@@ -21,11 +22,13 @@ const App = () => {
             element={<LibraryDetail />}
           />
           <Route path="/books/:bookID" element={<BookDetail />} />
-          <Route path="/profile" element={<UserProfile />} />
         </Route>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/profile/my_books" element={<MyBooks />} />
+        <Route element={<UserLayout />}>
+          <Route path="/profile/my_books" element={<MyBooks />} />
+          <Route path="/profile" element={<UserProfile />} />
+        </Route>
       </Routes>
     </>
   );
