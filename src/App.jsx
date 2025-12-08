@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import MyBooks from "./pages/MyBooks";
 import BookDetail from "./pages/BookDetail";
 import LibraryDetail from "./pages/LibraryDetail";
+import UserProfile from "./pages/UserProfile";
 
 const App = () => {
   return (
@@ -15,12 +16,16 @@ const App = () => {
         <Route element={<MainLayout />}>
           <Route path="/books" element={<Books />} />
           <Route path="/libraries" element={<Libraries />} />
+          <Route
+            path="/library/:libraryID/:libraryName"
+            element={<LibraryDetail />}
+          />
+          <Route path="/books/:bookID" element={<BookDetail />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Route>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile/my_books" element={<MyBooks />} />
-        <Route path="/books/:bookID" element={<BookDetail />} />
-        <Route path="/library/:libraryID" element={<LibraryDetail />} />
       </Routes>
     </>
   );

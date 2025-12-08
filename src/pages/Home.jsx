@@ -75,7 +75,7 @@ const Home = () => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            zIndex: 8492831,
+            zIndex: 31,
             alignItems: "center",
             textAlign: "center",
             color: "white",

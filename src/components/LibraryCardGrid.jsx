@@ -8,7 +8,7 @@ const LibraryCardGrid = ({ name, rating, id }) => {
       shadow="md"
       radius="md"
       component={Link}
-      to={`/library/${id}`}
+      to={`/library/${id}/${name}`}
       p="0"
       mx="sm"
       style={{

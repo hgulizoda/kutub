@@ -36,7 +36,7 @@ const BooksCardGrid = ({ author, name, publisher, id }) => {
           <Text fz="sm" my="0">
             Nashriyot: {publisher}
           </Text>
-          <Rating value={3.5} fractions={2} readOnly />
+          <Rating value={Math.floor(id % 5) + 1} fractions={2} readOnly />
         </Stack>
       </Group>
     </Card>

@@ -1,20 +1,20 @@
-import { Flex, Text, Container, Button } from "@mantine/core";
+import { Flex, Text, Container, Button, Box, Image } from "@mantine/core";
 import { NavLink, useNavigate } from "react-router-dom";
-import { IconSun } from "@tabler/icons-react";
+import { IconSun, IconUserFilled, IconWorld } from "@tabler/icons-react";
 import { Select } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import useAuthStore from "../store/useAuthStore";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { API } from "../api/api";
+import uzb from "../assets/images/uzb.png";
+import uk from "../assets/images/uk.png";
 
 const Header = ({ color }) => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [value, setValue] = useState("uz");
-  function handleLangChange(e) {
-    i18n.changeLanguage(e.target.value);
-  }
+  console.log(value);
 
   console.log(value);
   const { tokens, auth, setUser, user } = useAuthStore();
@@ -51,7 +51,7 @@ const Header = ({ color }) => {
         style={{
           position: "fixed",
           top: 0,
-          zIndex: 9999,
+          zIndex: 999999,
         }}
       >
         <Flex justify="space-between" align="center">
@@ -66,30 +66,74 @@ const Header = ({ color }) => {
               <NavLink to="/libraries" style={{ color: color }}>
                 {t("header.libraries")}
               </NavLink>
+              {auth ? (
+                <>
+                  <Text c={color}>|</Text>
+                  <NavLink style={{ color: color }}>Kitoblarim</NavLink>
+                  <NavLink style={{ color: color }}>Saqlanganlar</NavLink>
+                </>
+              ) : (
+                ""
+              )}
             </Flex>
-            {/* <Select
-              withAlignedLabels
-              checkIconPosition="left"
-              value={value}
-              onChange={(e) => {
-                handleLangChange(e), setValue(e.target.value);
-              }}
-              data={[
-                { value: "en", label: "English" },
-                { value: "uz", label: "O'zbek" },
-              ]}
-              style={{ color: "black" }}
-            /> */}
+            <Flex gap={5} align="center" ml={20}>
+              <Image src={value == "uz" ? uzb : uk} w={25} h={25} />
+
+              <Select
+                w={100}
+                p={0}
+                rightSectionWidth={0}
+                rightSection={null}
+                withCheckIcon={false}
+                styles={{
+                  input: {
+                    backgroundColor: "transparent",
+                    color: color,
+                    border: "none",
+                    padding: 0,
+                  },
+
+                  dropdown: {
+                    width: "400px",
+                  },
+                }}
+                data={[
+                  { value: "uz", label: "O'zbek" },
+                  { value: "eng", label: "English" },
+                ]}
+                value={value}
+                onChange={(val) => {
+                  setValue(val);
+                  i18n.changeLanguage(val);
+                }}
+              />
+            </Flex>
+
             {auth ? (
-              <Text
-                c="white"
-                fw="700"
-                ml="100px"
-                style={{ cursor: "pointer" }}
-                onClick={() => navigate("/profile/my_books")}
+              <Flex
+                gap={10}
+                align="center"
+                onClick={() => navigate("/profile")}
+                cursor="pointer"
               >
-                {user?.user.name}
-              </Text>
+                <Text
+                  c={color}
+                  fw="700"
+                  ml="100px"
+                  style={{ cursor: "pointer" }}
+                >
+                  {user?.user.name}
+                </Text>
+                <Box
+                  bg="gray"
+                  p={5}
+                  style={{ borderRadius: "50%" }}
+                  w={35}
+                  h={35}
+                >
+                  <IconUserFilled color="white" cursor="pointer" />
+                </Box>
+              </Flex>
             ) : (
               <Button onClick={() => navigate("/login")}>
                 {t("header.logIn")}
