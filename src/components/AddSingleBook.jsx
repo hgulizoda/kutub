@@ -36,10 +36,10 @@ const AddSingleBook = ({ initial, editId, number }) => {
     const arr = [];
     arr.push(newBook);
     mutation.mutate(arr);
-    if (number) {
-      form.reset();
-      number -= 1;
-    }
+  }
+
+  function resetForm(e) {
+    e.target.reset();
   }
 
   const mutation = useMutation({
@@ -56,16 +56,21 @@ const AddSingleBook = ({ initial, editId, number }) => {
 
     onSuccess: () => {
       queryClient.invalidateQueries(["myBooks"]);
-    },
-    onError: (error) => {
-      console.log("Error response:", error.response?.data);
-      console.log("Error status:", error.response?.status);
+      while (number) {
+        resetForm();
+        number -= 1;
+      }
     },
   });
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
+          resetForm(e);
+        }}
+      >
         <Stack>
           <TextInput
             label="Name"
