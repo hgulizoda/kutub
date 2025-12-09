@@ -9,6 +9,7 @@ import {
   Grid,
   GridCol,
   Modal,
+  NumberInput,
   Stack,
   Text,
 } from "@mantine/core";
@@ -17,9 +18,14 @@ import ExcelDropzone from "../components/Dropzone";
 import queryClient from "../api/queryClient";
 import { useDisclosure } from "@mantine/hooks";
 import AddSingleBook from "../components/AddSingleBook";
+import { useState } from "react";
 const MyBooks = () => {
   const { tokens } = useAuthStore();
   const [opened, { open, close }] = useDisclosure(false);
+  const [addType, setAddType] = useState("");
+  const [next, setNext] = useState(false);
+
+  const [number, setNumber] = useState("");
 
   const { data: myBooks } = useQuery({
     queryKey: ["myBooks"],
@@ -72,14 +78,25 @@ const MyBooks = () => {
                 <ExcelDropzone />
               </Box>
 
-              <Button mt={40} onClick={open}>
+              <Button
+                mt={40}
+                onClick={() => {
+                  open(), setAddType("single");
+                }}
+              >
                 <Flex gap={10} align="center">
                   <IconPlus size={20} />
                   <Text>Add book</Text>
                 </Flex>
               </Button>
 
-              <Button mt={5} onClick={open}>
+              <Button
+                mt={5}
+                onClick={() => {
+                  open();
+                  setAddType("multiple");
+                }}
+              >
                 <Flex gap={10} align="center">
                   <IconPlus size={20} />
                   <Text>Add multiple books</Text>
@@ -109,8 +126,30 @@ const MyBooks = () => {
         </Grid>
       </Stack>
 
-      <Modal opened={opened} onClose={close} title="Add a single book">
-        <AddSingleBook initial={{}} />
+      <Modal opened={opened} onClose={close} title="Add">
+        {addType === "single" || next ? (
+          <AddSingleBook initial={{}} number={number} />
+        ) : (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setNumber(e.target[0].value);
+              setNext(true);
+            }}
+          >
+            <Stack>
+              <NumberInput
+                label="Number of Books"
+                placeholder="Enter number"
+                min={1}
+                max={10}
+                required
+              />
+
+              <Button type="submit">Next</Button>
+            </Stack>
+          </form>
+        )}
       </Modal>
     </>
   );

@@ -12,8 +12,9 @@ import { API } from "../api/api";
 import useAuthStore from "../store/useAuthStore";
 import queryClient from "../api/queryClient";
 
-const AddSingleBook = ({ initial, editId }) => {
+const AddSingleBook = ({ initial, editId, number }) => {
   const { tokens } = useAuthStore();
+
   const form = useForm({
     initialValues: {
       name: initial?.name || "",
@@ -34,8 +35,11 @@ const AddSingleBook = ({ initial, editId }) => {
 
     const arr = [];
     arr.push(newBook);
-
     mutation.mutate(arr);
+    if (number) {
+      form.reset();
+      number -= 1;
+    }
   }
 
   const mutation = useMutation({
