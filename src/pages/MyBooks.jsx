@@ -1,37 +1,111 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { API } from "../api/api";
 import useAuthStore from "../store/useAuthStore";
 import BooksCardGrid from "../components/BooksCardGrid";
-
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  GridCol,
+  Modal,
+  Stack,
+  Text,
+} from "@mantine/core";
+import { IconEdit, IconPlus, IconTrash } from "@tabler/icons-react";
+import ExcelDropzone from "../components/Dropzone";
+import queryClient from "../api/queryClient";
+import { useDisclosure } from "@mantine/hooks";
+import AddSingleBook from "../components/AddSingleBook";
 const MyBooks = () => {
   const { tokens } = useAuthStore();
+  const [opened, { open, close }] = useDisclosure(false);
 
-  const {
-    data: myBooks = [],
-    isLoading,
-    error,
-  } = useQuery({
+  const { data: myBooks } = useQuery({
     queryKey: ["myBooks"],
     queryFn: async () => {
-      const res = await API.get("/libraries/library/books/", {
-        headers: { Authorization: `Bearer ${tokens.access}` },
+      const res = await API.get("/libraries/library/books", {
+        headers: { Authorization: `Bearer ${tokens?.access}` },
       });
-      console.log(res.data);
       return res.data;
     },
     enabled: !!tokens?.access,
   });
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading books</p>;
-  if (!myBooks.length) return <p>No books found</p>;
+  const deleteMutation = useMutation({
+    mutationFn: async (id) => {
+      return await API.delete(`/books/book/${id}/`, {
+        headers: {
+          Authorization: `Bearer ${tokens?.access}`,
+        },
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["myBooks"]);
+    },
+  });
+
+  const mutation = useMutation({
+    queryFn: async (id) => {
+      const res = await API.get(`/books/book/${id}/`);
+      return res.data;
+    },
+  });
 
   return (
-    <div>
-      {myBooks.map((book) => (
-        <BooksCardGrid key={book.id} {...book} />
-      ))}
-    </div>
+    <>
+      <Stack w="100%" mt={50}>
+        <Text fz={"h1"} fw={600} c={"rgba(57, 58, 58, 1)"}>
+          My Books
+        </Text>
+        <Grid>
+          <GridCol span={2.9}>
+            <Box
+              style={{
+                padding: "20px 25px 40px",
+                borderRadius: "8px",
+                height: "100%",
+                flexDirection: "column",
+              }}
+            >
+              <Box style={{ cursor: "pointer" }}>
+                <ExcelDropzone />
+              </Box>
+
+              <Button mt={40} onClick={open}>
+                <Flex gap={10} align="center">
+                  <IconPlus size={20} />
+                  <Text>Add book</Text>
+                </Flex>
+              </Button>
+            </Box>
+          </GridCol>
+          {myBooks?.map((book) => (
+            <Grid.Col span={2.9} key={book.id} pos={"relative"}>
+              <BooksCardGrid {...book} />
+              <Flex pos={"absolute"} top={20} right={30} gap={10}>
+                <Button
+                  bg="rgba(252, 252, 252, 1)"
+                  onClick={() => deleteMutation.mutate(book.id)}
+                >
+                  <IconTrash color="red" size={20} />
+                </Button>
+                <Button
+                  bg="rgba(252, 252, 252, 1)"
+                  onClick={() => mutation.mutate(book.id)}
+                >
+                  <IconEdit color="orange" size={20} />
+                </Button>
+              </Flex>
+            </Grid.Col>
+          ))}
+        </Grid>
+      </Stack>
+
+      <Modal opened={opened} onClose={close} title="Add a single book">
+        <AddSingleBook initial={{}} />
+      </Modal>
+    </>
   );
 };
 

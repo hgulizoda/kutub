@@ -24,6 +24,7 @@ const UserProfileAside = () => {
         h="100vh"
         bg="rgba(72, 130, 123, 0.13)"
         pt={100}
+        pos={"fixed"}
         style={{
           borderRadius: "8px",
           padding: "30px 20px",

@@ -1,11 +1,10 @@
 import { Flex, Text, Container, Button, Box, Image } from "@mantine/core";
 import { NavLink, useNavigate } from "react-router-dom";
-import { IconSun, IconUserFilled, IconWorld } from "@tabler/icons-react";
+import { IconUserFilled, IconWorld } from "@tabler/icons-react";
 import { Select } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import useAuthStore from "../store/useAuthStore";
-import { API } from "../api/api";
 import uzb from "../assets/images/uzb.png";
 import uk from "../assets/images/uk.png";
 
