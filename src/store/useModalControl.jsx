@@ -1,8 +1,10 @@
 import { create } from "zustand";
 
 const useModalControl = create((set) => ({
-  count: 1,
-  inc: () => set((state) => ({ count: state.count + 1 })),
+  open: false,
+  openModal: () => set({ open: true }),
+  closeModal: () => set({ open: false }),
+  toggleModal: () => set((state) => ({ open: !state.open })),
 }));
 
 export default useModalControl;

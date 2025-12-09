@@ -78,6 +78,13 @@ const MyBooks = () => {
                   <Text>Add book</Text>
                 </Flex>
               </Button>
+
+              <Button mt={5} onClick={open}>
+                <Flex gap={10} align="center">
+                  <IconPlus size={20} />
+                  <Text>Add multiple books</Text>
+                </Flex>
+              </Button>
             </Box>
           </GridCol>
           {myBooks?.map((book) => (
