@@ -222,7 +222,8 @@ const LoginPage = () => {
               />
 
               <Text c="gray " mb="lg">
-                Kutubxonachi bo'lmoqchimisiz? <Link>Ro'yxatdan o'ting</Link>
+                Kutubxonachi bo'lmoqchimisiz?{" "}
+                <Link to="/signUp">Ro'yxatdan o'ting</Link>
               </Text>
 
               <Button

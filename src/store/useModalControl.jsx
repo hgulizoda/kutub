@@ -1,10 +1,9 @@
 import { create } from "zustand";
 
-const useModalControl = create((set) => ({
-  open: false,
-  openModal: () => set({ open: true }),
-  closeModal: () => set({ open: false }),
-  toggleModal: () => set((state) => ({ open: !state.open })),
+const useModalStore = create((set) => ({
+  opened: false,
+  open: () => set({ opened: true }),
+  close: () => set({ opened: false }),
 }));
 
-export default useModalControl;
+export default useModalStore;

@@ -9,6 +9,7 @@ import BookDetail from "./pages/BookDetail";
 import LibraryDetail from "./pages/LibraryDetail";
 import UserProfile from "./pages/UserProfile";
 import UserLayout from "./components/UserLayout";
+import LibraryRegistrationForm from "./pages/SignUp";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         </Route>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signUp" element={<LibraryRegistrationForm />} />
         <Route element={<UserLayout />}>
           <Route path="/profile/my_books" element={<MyBooks />} />
           <Route path="/profile" element={<UserProfile />} />

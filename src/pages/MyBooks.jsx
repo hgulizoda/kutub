@@ -16,16 +16,15 @@ import {
 import { IconEdit, IconPlus, IconTrash } from "@tabler/icons-react";
 import ExcelDropzone from "../components/Dropzone";
 import queryClient from "../api/queryClient";
-import { useDisclosure } from "@mantine/hooks";
 import AddSingleBook from "../components/AddSingleBook";
 import { useState } from "react";
+import useModalStore from "../store/useModalControl";
 const MyBooks = () => {
   const { tokens } = useAuthStore();
-  const [opened, { open, close }] = useDisclosure(false);
   const [addType, setAddType] = useState("");
   const [next, setNext] = useState(false);
-
   const [number, setNumber] = useState("");
+  const { opened, open, close } = useModalStore();
 
   const { data: myBooks } = useQuery({
     queryKey: ["myBooks"],
@@ -133,8 +132,12 @@ const MyBooks = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              setNumber(e.target[0].value);
-              setNext(true);
+              if (opened) {
+                setNumber(e.target[0].value);
+                setNext(true);
+              } else {
+                setNumber(false);
+              }
             }}
           >
             <Stack>
