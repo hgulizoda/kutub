@@ -44,6 +44,7 @@ const LibraryDetail = () => {
   });
 
   const library = data?.results;
+  console.log(library);
 
   return (
     <>
@@ -183,31 +184,43 @@ const LibraryDetail = () => {
               <Text c="rgba(59, 61, 58, 1)">Telefon: {library?.phone}</Text>
             </Flex>
             <Flex gap={20}>
-              <a
-                href={`https://www.instagram.com/${library?.library.social_media.instagram}`}
-                target="blank"
-                style={{
-                  color:
-                    "linear-gradient(45deg, #f58529, #feda77, #dd2a7b, #8134af, #515bd4)",
-                }}
-              >
-                <IconBrandInstagram color="#E1306C" />
-              </a>
+              {library?.library.social_media.instagram ? (
+                <a
+                  href={`https://www.instagram.com/${library?.library.social_media.instagram}`}
+                  target="blank"
+                  style={{
+                    color:
+                      "linear-gradient(45deg, #f58529, #feda77, #dd2a7b, #8134af, #515bd4)",
+                  }}
+                >
+                  <IconBrandInstagram color="#E1306C" />
+                </a>
+              ) : (
+                ""
+              )}
 
-              <a
-                href={`https://www.facebook.com/${library?.library.social_media.facebook}`}
-                target="blank"
-                style={{ color: "rgba(45, 78, 150, 1)" }}
-              >
-                <IconBrandFacebookFilled />
-              </a>
-              <a
-                href={`https://www.telegram.com/${library?.library.social_media.telegram}`}
-                target="blank"
-                style={{ color: "rgba(68, 117, 223, 1)" }}
-              >
-                <IconBrandTelegram />
-              </a>
+              {library?.library.social_media.facebook ? (
+                <a
+                  href={`https://www.facebook.com/${library?.library.social_media.facebook}`}
+                  target="blank"
+                  style={{ color: "rgba(45, 78, 150, 1)" }}
+                >
+                  <IconBrandFacebookFilled />
+                </a>
+              ) : (
+                ""
+              )}
+              {library?.library.social_media.telegram ? (
+                <a
+                  href={`https://www.telegram.com/${library?.library.social_media.telegram}`}
+                  target="blank"
+                  style={{ color: "rgba(68, 117, 223, 1)" }}
+                >
+                  <IconBrandTelegram />
+                </a>
+              ) : (
+                ""
+              )}
             </Flex>
           </Stack>
         </Box>

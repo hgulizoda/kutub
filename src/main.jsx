@@ -10,6 +10,7 @@ import "./i18n";
 import App from "./App.jsx";
 import { MantineProvider } from "@mantine/core";
 import theme from "./styles/theme.js";
+import "leaflet/dist/leaflet.css";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>

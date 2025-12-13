@@ -21,11 +21,15 @@ const Libraries = () => {
         </Flex>
 
         <Grid>
-          {libraries?.map((library) => (
-            <Grid.Col key={library.id} span={6}>
-              <LibraryCardGrid {...library} />
-            </Grid.Col>
-          ))}
+          {libraries?.map((library) =>
+            library.is_active ? (
+              <Grid.Col key={library.id} span={6}>
+                <LibraryCardGrid {...library} />
+              </Grid.Col>
+            ) : (
+              ""
+            )
+          )}
         </Grid>
       </Container>
     </>
